@@ -17,19 +17,41 @@ v-app
       gmap-marker(
         :position="selectLocation"
       )
-    v-slide-y-reverse-transition
-      v-btn(
-        @click="selectLocation = currentLocation"
-        fixed
-        bottom
-        left
-        dark
-        large
-        color="red"
-        v-if="selectLocation"
-      )
-        v-icon(left) mdi-bug
-        span 害虫発生を報告
+    v-dialog(
+      v-model="dialog"
+      persistent
+    )
+      template(v-slot:activator="{ on, attrs }")
+        v-slide-y-reverse-transition
+          v-btn(
+            fixed
+            bottom
+            left
+            dark
+            large
+            color="red"
+            v-bind="attrs"
+            v-on="on"
+            v-if="selectLocation"
+          )
+            v-icon(left) mdi-bug
+            span 害虫発生を報告
+      template(v-slot:default="dialog")
+        v-card
+          v-card-title ピン留めした位置での害虫発生を報告しますか？
+          v-card-text ピン留めをし直したい場合は、この画面を「いいえ」で閉じて、今一度正しい位置へピン留めをしてください。
+          v-card-actions
+            v-spacer
+            v-btn(
+              color="red"
+              text
+              @click="cancel"
+            ) いいえ
+            v-btn(
+              color="green"
+              text
+              @click="submit"
+            ) はい
     v-btn(
       @click="setCurrentLocation()"
       fixed
@@ -61,6 +83,7 @@ export default class PageIndex extends Vue {
     anchor: { x: 30, y: 30 },
     scaledSize: { height: 60, width: 60 },
   }
+  dialog: boolean = false
 
   getCurrentPosition () {
     return new Promise(function (resolve, reject) {
@@ -81,6 +104,16 @@ export default class PageIndex extends Vue {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()
     }
+  }
+
+  cancel () {
+    this.dialog = false
+  }
+
+  submit () {
+    // TODO: 情報送信処理を挟む
+    this.selectLocation = null
+    this.dialog = false
   }
 
   async mounted () {
