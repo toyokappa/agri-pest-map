@@ -7,6 +7,11 @@ v-app
       :style="mapStyle"
       :options="mapOptions"
     )
+      gmap-marker(
+        :position="mapLocation"
+        :icon="markerIcon"
+        :optimized="true"
+      )
     v-btn(
       fixed
       bottom
@@ -23,14 +28,14 @@ v-app
       bottom
       right
       fab
-      color="lime"
     )
-      v-icon mdi-crosshairs-gps
+      v-icon(color="blue") mdi-crosshairs-gps
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { MapLocation, MapOptions, MapStyle } from '~/types/googleMap'
+import currentMarker from '~/assets/images/currentMarker.svg'
 
 @Component
 export default class PageIndex extends Vue {
@@ -41,6 +46,11 @@ export default class PageIndex extends Vue {
     streetViewControl: false,
     zoomControl: false,
     fullscreenControl: false
+  }
+  markerIcon = {
+    url: currentMarker,
+    anchor: { x: 30, y: 30 },
+    scaledSize: { height: 60, width: 60 },
   }
 
   getCurrentPosition () {
@@ -59,6 +69,7 @@ export default class PageIndex extends Vue {
 
   async mounted () {
     await this.setCurrentLocation()
+    console.log(currentMarker)
   }
 }
 </script>

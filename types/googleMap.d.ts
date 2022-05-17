@@ -13,3 +13,9 @@ export interface MapOptions {
  zoomControl: boolean
  fullscreenControl: boolean
 }
+
+export interface markerIcon {
+  url: string
+  anchor: { x: number, y: number }
+  scaledSize: { height: number, width: number }
+}
