@@ -1,5 +1,8 @@
 <template lang="pug">
-div hello
+v-app
+  v-main
+    v-container(fluid)
+      v-btn hello
 </template>
 
 <script lang="ts">
