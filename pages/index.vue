@@ -140,6 +140,7 @@ export default class PageIndex extends Vue {
   }
 
   async created () {
+    // @ts-ignore for $ctfCmaClient
     const ctfSpace = await this.$ctfCmaClient.getSpace(process.env.ctfSpaceId)
     this.ctfClient = await ctfSpace.getEnvironment(process.env.ctfEnvironmentId)
   }
