@@ -101,7 +101,6 @@ export default class PageIndex extends Vue {
   }
 
   pinMap(event: any) {
-    console.log(event)
     this.selectLocation = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()
