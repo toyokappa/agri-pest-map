@@ -12,6 +12,7 @@
     "contentful-management": "^10.6.0",
     "core-js": "^3.19.3",
     "nuxt": "^2.15.8",
+    "nuxt-basic-auth-module": "^1.4.1",
     "nuxt-property-decorator": "^2.9.1",
     "vue": "^2.6.14",
     "vue-server-renderer": "^2.6.14",
