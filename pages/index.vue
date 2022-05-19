@@ -100,6 +100,7 @@ export default class PageIndex extends Vue {
   }
 
   pinMap(event: any) {
+    console.log(event)
     this.selectLocation = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()
@@ -118,6 +119,10 @@ export default class PageIndex extends Vue {
 
   async mounted () {
     await this.setCurrentLocation()
+    const ctfSpace = await this.$ctfCmaClient.getSpace(process.env.ctfSpaceId)
+    const ctfEnv = await ctfSpace.getEnvironment(process.env.ctfEnvironmentId)
+    const entries = await ctfEnv.getEntries()
+    console.log(entries)
   }
 }
 </script>

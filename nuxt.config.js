@@ -21,6 +21,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  env: {
+    ctfCmaAccessToken: process.env.CTF_CMA_ACCESS_TOKEN,
+    ctfSpaceId: process.env.CTF_SPACE_ID,
+    ctfEnvironmentId: process.env.CTF_ENVIRONMENT_ID,
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -28,7 +33,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/googleMap',
+    '~/plugins/googleMap.js',
+    '~/plugins/contentfulCmaClient.ts',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
