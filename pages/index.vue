@@ -84,6 +84,7 @@ export default class PageIndex extends Vue {
     scaledSize: { height: 60, width: 60 },
   }
   dialog: boolean = false
+  ctfClient: any = {}
 
   getCurrentPosition () {
     return new Promise(function (resolve, reject) {
@@ -111,18 +112,39 @@ export default class PageIndex extends Vue {
     this.dialog = false
   }
 
-  submit () {
-    // TODO: 情報送信処理を挟む
+  async submit () {
+    await this.appendPestMap()
     this.selectLocation = null
     this.dialog = false
   }
 
+  async appendPestMap () {
+    if (!this.ctfClient) return console.error('ctfClient not exist!');
+    if (!this.selectLocation) return console.error('selectLacation not exist!');
+    
+    const { lat, lng } = this.selectLocation
+    const res = await this.ctfClient.createEntry(
+      'pestMap',
+      {
+        fields: {
+          latitude: {
+            'en-US': lat
+          },
+          longitude: {
+            'en-US': lng
+          }
+        }
+      }
+    )
+    await res.publish()
+  }
+
+  async created () {
+    const ctfSpace = await this.$ctfCmaClient.getSpace(process.env.ctfSpaceId)
+    this.ctfClient = await ctfSpace.getEnvironment(process.env.ctfEnvironmentId)
+  }
   async mounted () {
     await this.setCurrentLocation()
-    const ctfSpace = await this.$ctfCmaClient.getSpace(process.env.ctfSpaceId)
-    const ctfEnv = await ctfSpace.getEnvironment(process.env.ctfEnvironmentId)
-    const entries = await ctfEnv.getEntries()
-    console.log(entries)
   }
 }
 </script>
