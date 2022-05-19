@@ -1,3 +1,5 @@
+const titlePrefix = process.env.NUXT_ENV === 'production' ? '' : '【デモ版】'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -7,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'agri-pest-map',
+    title: `${titlePrefix}害虫発生報告アプリ`,
     htmlAttrs: {
       lang: 'en'
     },
