@@ -1,5 +1,5 @@
 const fakeBasicAuth = () => {
-  const setPass = 'kisama miteiruna'
+  const setPass = process.env.fakeBasicPass
 
   const htmlElStyle = document.querySelector('html').style
   htmlElStyle.opacity = 0

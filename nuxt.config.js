@@ -26,6 +26,7 @@ export default {
     ctfSpaceId: process.env.CTF_SPACE_ID,
     ctfEnvironmentId: process.env.CTF_ENVIRONMENT_ID,
     googleApiKey: process.env.GOOGLE_API_KEY,
+    fakeBasicPass: process.env.FAKE_BASIC_PASS
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
