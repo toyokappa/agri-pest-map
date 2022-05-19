@@ -18,6 +18,23 @@ v-app
         :position="selectLocation"
       )
     v-dialog(
+      v-model="disabledGps"
+      persistent
+    )
+      template(v-slot:default="disabledGps")
+        v-card
+          v-card-title ブラウザのGPS設定をONにしてください
+          v-card-text
+            | 当アプリをご使用いただくにはご利用のブラウザのGPS設定をONにしていただく必要があります。
+            | 設定を変更後、下記のボタンをクリックするか、ブラウザ更新でページを再読込してください。
+          v-card-actions
+            v-spacer
+            v-btn(
+              color="blue"
+              text
+              @click="reload"
+            ) ページを再読込する
+    v-dialog(
       v-model="dialog"
       persistent
     )
@@ -92,6 +109,7 @@ export default class PageIndex extends Vue {
   dialog: boolean = false
   snackbar: boolean = false
   ctfClient: any = {}
+  disabledGps: boolean = false
 
   getCurrentPosition () {
     return new Promise(function (resolve, reject) {
@@ -100,7 +118,13 @@ export default class PageIndex extends Vue {
   }
 
   async setCurrentLocation () {
-    const currentPosition: any = await this.getCurrentPosition()
+    const currentPosition: any = await this.getCurrentPosition().catch(err => {
+      console.error(err)
+      this.disabledGps = true
+      return null
+    })
+    if (!currentPosition) return
+
     this.currentLocation = {
       lat: currentPosition.coords.latitude,
       lng: currentPosition.coords.longitude
@@ -112,6 +136,10 @@ export default class PageIndex extends Vue {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()
     }
+  }
+
+  reload () {
+    location.reload()
   }
 
   cancel () {
