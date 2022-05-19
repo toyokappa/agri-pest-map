@@ -76,7 +76,8 @@ export default class PageIndex extends Vue {
   mapOptions: MapOptions = {
     streetViewControl: false,
     zoomControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
+    gestureHandling: 'greedy',
   }
   currentMarkerIcon: markerIcon = {
     url: currentMarker,

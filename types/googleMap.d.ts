@@ -12,6 +12,7 @@ export interface MapOptions {
  streetViewControl: boolean
  zoomControl: boolean
  fullscreenControl: boolean
+ gestureHandling: string
 }
 
 export interface markerIcon {
