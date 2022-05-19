@@ -60,6 +60,11 @@ v-app
       fab
     )
       v-icon(color="blue") mdi-crosshairs-gps
+  v-snackbar(
+    v-model="snackbar"
+    :timeout="5000"
+    color="green"
+  ) 害虫発生を報告しました。
 </template>
 
 <script lang="ts">
@@ -85,6 +90,7 @@ export default class PageIndex extends Vue {
     scaledSize: { height: 60, width: 60 },
   }
   dialog: boolean = false
+  snackbar: boolean = false
   ctfClient: any = {}
 
   getCurrentPosition () {
@@ -114,6 +120,7 @@ export default class PageIndex extends Vue {
 
   async submit () {
     await this.appendPestMap()
+    this.snackbar = true
     this.selectLocation = null
     this.dialog = false
   }
