@@ -74,7 +74,7 @@ import currentMarker from '~/assets/images/currentMarker.svg'
 
 @Component
 export default class PageIndex extends Vue {
-  currentLocation: MapLocation = { lat: 0, lng: 0 }
+  currentLocation: MapLocation = { lat: 36.391436564351366, lng: 139.06007846560172 } // 初期値は群馬県庁
   selectLocation: MapLocation | null = null
   mapZoom: number = 16
   mapStyle: MapStyle = { height: '100vh', width: '100%'}
