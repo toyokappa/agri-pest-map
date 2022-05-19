@@ -36,6 +36,7 @@ export default {
   plugins: [
     '~/plugins/googleMap.js',
     '~/plugins/contentfulCmaClient.ts',
+    { src: '~/plugins/fakeBasicAuth.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,13 +51,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxt-basic-auth-module'
   ],
-  basic: {
-    name: 'user',
-    pass: 'pass',
-    enabled: true
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
